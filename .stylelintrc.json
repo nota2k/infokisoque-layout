@@ -1,0 +1,15 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "rules": {
+    "scss/at-import-partial-extension": null,
+    "scss/at-import-no-partial-leading-underscore": null,
+    "selector-class-pattern": null,
+    "no-descending-specificity": null
+  },
+  "ignoreFiles": [
+    "node_modules/**/*",
+    "vendor/**/*",
+    "dist/**/*",
+    "build/**/*"
+  ]
+}

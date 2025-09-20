@@ -1,0 +1,84 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "054e9ae80afe50c49a5d84ad94c8c9a6",
+    "packages": [
+        {
+            "name": "2crt/block-sections",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2crt/block-sections.git",
+                "reference": "60d624c37c2ff945e1bd5b07292b9a1e6bfbd631"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2crt/block-sections/zipball/60d624c37c2ff945e1bd5b07292b9a1e6bfbd631",
+                "reference": "60d624c37c2ff945e1bd5b07292b9a1e6bfbd631",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/register-wp-cli-commands.php",
+                    "src/register-block-category.php",
+                    "src/load-scripts.php"
+                ],
+                "psr-4": {
+                    "BlockSections\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "issues": "https://github.com/2crt/block-sections/issues",
+                "source": "https://github.com/2crt/block-sections/tree/v1.0.8"
+            },
+            "time": "2024-09-24T06:57:25+00:00"
+        },
+        {
+            "name": "2crt/uup-assets-loader",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2crt/uup-assets-loader.git",
+                "reference": "afd898ea0a8f743b9184dbad10c5554678d72177"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2crt/uup-assets-loader/zipball/afd898ea0a8f743b9184dbad10c5554678d72177",
+                "reference": "afd898ea0a8f743b9184dbad10c5554678d72177",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Uup\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "issues": "https://github.com/2crt/uup-assets-loader/issues",
+                "source": "https://github.com/2crt/uup-assets-loader/tree/v1.0.6"
+            },
+            "time": "2024-12-19T10:12:44+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

@@ -1,0 +1,33 @@
+/**
+ * Fichier SCSS principal du thème InfoKiosque
+ */
+
+// Import des variables et mixins génériques
+@import '@variables/_index';
+@import '@mixins/_index';
+@import '@functions/_index';
+
+// Import des composants
+@import '@components/_index';
+
+// Styles génériques
+// @import '@generic/reset';
+// @import '@generic/typography';
+// @import '@generic/utilities';
+
+// Styles du thème
+// @import 'layout/header';
+// @import 'layout/footer';
+// @import 'layout/sidebar';
+// @import 'layout/content';
+
+// Styles des pages
+// @import 'pages/home';
+// @import 'pages/single';
+// @import 'pages/archive';
+
+// Styles des composants
+// @import 'components/buttons';
+// @import 'components/forms';
+// @import 'components/navigation';
+// @import 'components/blocks';

@@ -1,0 +1,13 @@
+{
+	"type": "project",
+	"autoload": {
+		"psr-4": {
+			"App\\": "src/",
+			"Sections\\": "sections/"
+		}
+	},
+	"require": {
+		"2crt/uup-assets-loader": "^1.0.5",
+		"2crt/block-sections": "^1.0"
+	}
+}
