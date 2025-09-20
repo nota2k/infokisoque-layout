@@ -2,10 +2,9 @@
  * Styles pour l'éditeur de blocs WordPress
  */
 
-// Import des variables et mixins génériques
-@import '@variables/_index';
-@import '@mixins/_index';
-@import '@functions/_index';
+// use des variables et mixins génériques
+@use 'generic/variables';
+@use 'generic/mixins';
 
 // Styles spécifiques à l'éditeur de blocs
 .editor-styles-wrapper {
@@ -21,11 +20,11 @@
 // }
 
 // Styles pour l'éditeur de blocs
-// @import 'editor/blocks';
-// @import 'editor/typography';
-// @import 'editor/layout';
-// @import 'editor/components';
+// @use 'editor/blocks';
+// @use 'editor/typography';
+// @use 'editor/layout';
+// @use 'editor/components';
 
 // Styles pour les outils de l'éditeur
-// @import 'editor/toolbar';
-// @import 'editor/sidebar';
+// @use 'editor/toolbar';
+// @use 'editor/sidebar';

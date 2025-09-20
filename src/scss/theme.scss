@@ -3,31 +3,26 @@
  */
 
 // Import des variables et mixins génériques
-@import '@variables/_index';
-@import '@mixins/_index';
-@import '@functions/_index';
-
-// Import des composants
-@import '@components/_index';
+@use 'generic/variables';
+@use 'generic/mixins';
 
 // Styles génériques
-// @import '@generic/reset';
-// @import '@generic/typography';
-// @import '@generic/utilities';
+// @use 'generic/reset';
+@use 'generic/fonts';
 
 // Styles du thème
-// @import 'layout/header';
-// @import 'layout/footer';
-// @import 'layout/sidebar';
-// @import 'layout/content';
+// @use 'layout/header';
+// @use 'layout/footer';
+// @use 'layout/sidebar';
+// @use 'layout/content';
 
 // Styles des pages
-// @import 'pages/home';
-// @import 'pages/single';
-// @import 'pages/archive';
+// @use 'pages/home';
+// @use 'pages/single';
+// @use 'pages/archive';
 
 // Styles des composants
-// @import 'components/buttons';
-// @import 'components/forms';
-// @import 'components/navigation';
-// @import 'components/blocks';
+// @use 'components/buttons';
+// @use 'components/forms';
+// @use 'components/navigation';
+// @use 'components/blocks';
