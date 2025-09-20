@@ -7,12 +7,7 @@
 @use 'generic/mixins';
 
 // Styles spécifiques à l'éditeur de blocs
-.editor-styles-wrapper {
-    // Styles de base pour l'éditeur
-    font-family: var(--wp--preset--font-family--system-font);
-    line-height: var(--wp--preset--line-height--normal);
-    color: var(--wp--preset--color--foreground);
-}
+
 
 // Styles pour les blocs personnalisés dans l'éditeur
 // .wp-block-custom-block {

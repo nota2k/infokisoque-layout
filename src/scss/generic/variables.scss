@@ -1,9 +1,27 @@
 /**
- * Index des styles génériques
+ * Variables Sass pour le thème InfoKiosque
  */
 
-// Variables
-@use 'generic/variables';
+// Couleurs
+$primary-color: #007cba;
+$secondary-color: #f0f0f0;
+$text-color: #333;
+$background-color: #fff;
 
-// Mixins
-@use 'generic/mixins';
+// Typographie
+$font-family-primary: 'Arial', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.6;
+
+// Espacements
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
