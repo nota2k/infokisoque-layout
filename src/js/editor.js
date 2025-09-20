@@ -8,6 +8,9 @@ import $ from 'jquery';
 // Import des styles spécifiques à l'éditeur
 import '../scss/block-editor.scss';
 
+// Import des blocs personnalisés
+import './blocks/index.js';
+
 // Fonctions spécifiques à l'éditeur de blocs
 $(document).ready(function() {
     console.log('Scripts éditeur InfoKiosque chargés');

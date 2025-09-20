@@ -106,6 +106,11 @@
 			"writingMode": true,
 			"defaultFontSizes": false,
 			"fluid": true,
+			"fontStyle": true,
+			"fontWeight": true,
+			"letterSpacing": true,
+			"textDecoration": true,
+			"textTransform": true,
 			"fontSizes": [
 				{
 					"fluid": false,
@@ -621,6 +626,24 @@
 			},
 			"core/list": {
 				"css": "& li{margin-top: 0.5rem;}"
+			},
+			"infokiosque/card-resource-editable": {
+				"spacing": {
+					"padding": {
+						"top": "var:preset|spacing|40",
+						"right": "var:preset|spacing|50",
+						"bottom": "var:preset|spacing|40",
+						"left": "var:preset|spacing|50"
+					},
+					"margin": {
+						"bottom": "var:preset|spacing|50"
+					}
+				},
+				"border": {
+					"style": "solid",
+					"width": "1px",
+					"color": "var:preset|color|accent-6"
+				}
 			}
 		},
 		"elements": {

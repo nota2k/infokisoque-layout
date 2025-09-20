@@ -15,20 +15,92 @@ define('APP_THEME_DIR', __DIR__ . '/');
 define('APP_THEME_URL', get_stylesheet_directory_uri());
 
 
-// Adds theme support for post formats.
-if ( ! function_exists( 'infokiosque_post_format_setup' ) ) :
+// Adds theme support for post formats and editor features.
+if ( ! function_exists( 'infokiosque_setup' ) ) :
 	/**
-	 * Adds theme support for post formats.
+	 * Adds theme support for post formats and editor features.
 	 *
 	* @since InfoKiosque 1.0
 	 *
 	 * @return void
 	 */
-	function infokiosque_post_format_setup() {
+	function infokiosque_setup() {
+		// Support for post formats
 		add_theme_support( 'post-formats', array( 'aside', 'audio', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video' ) );
+		
+		// Support for editor features
+		add_theme_support( 'editor-color-palette' );
+		add_theme_support( 'disable-custom-colors' );
+		add_theme_support( 'editor-font-sizes' );
+		add_theme_support( 'disable-custom-font-sizes' );
+		add_theme_support( 'editor-styles' );
+		add_theme_support( 'wp-block-styles' );
+		add_theme_support( 'responsive-embeds' );
+		add_theme_support( 'align-wide' );
+		
+		// Support pour la typographie dans l'éditeur
+		add_theme_support( 'appearance-tools' );
+		
+		// Palette de couleurs personnalisée
+		add_theme_support( 'editor-color-palette', array(
+			array(
+				'name'  => __( 'Noir', 'infokiosque' ),
+				'slug'  => 'noir',
+				'color' => '#000000',
+			),
+			array(
+				'name'  => __( 'Blanc', 'infokiosque' ),
+				'slug'  => 'blanc',
+				'color' => '#ffffff',
+			),
+			array(
+				'name'  => __( 'Gris foncé', 'infokiosque' ),
+				'slug'  => 'gris-fonce',
+				'color' => '#333333',
+			),
+			array(
+				'name'  => __( 'Gris clair', 'infokiosque' ),
+				'slug'  => 'gris-clair',
+				'color' => '#666666',
+			),
+		) );
+
+		// Tailles de police personnalisées
+		add_theme_support( 'editor-font-sizes', array(
+			array(
+				'name'      => __( 'Petit', 'infokiosque' ),
+				'shortName' => __( 'S', 'infokiosque' ),
+				'size'      => 14,
+				'slug'      => 'petit'
+			),
+			array(
+				'name'      => __( 'Normal', 'infokiosque' ),
+				'shortName' => __( 'M', 'infokiosque' ),
+				'size'      => 16,
+				'slug'      => 'normal'
+			),
+			array(
+				'name'      => __( 'Grand', 'infokiosque' ),
+				'shortName' => __( 'L', 'infokiosque' ),
+				'size'      => 24,
+				'slug'      => 'grand'
+			),
+			array(
+				'name'      => __( 'Très grand', 'infokiosque' ),
+				'shortName' => __( 'XL', 'infokiosque' ),
+				'size'      => 32,
+				'slug'      => 'tres-grand'
+			),
+			array(
+				'name'      => __( 'Énorme', 'infokiosque' ),
+				'shortName' => __( 'XXL', 'infokiosque' ),
+				'size'      => 48,
+				'slug'      => 'enorme'
+			),
+		) );
 	}
 endif;
-add_action( 'after_setup_theme', 'infokiosque_post_format_setup' );
+add_action( 'after_setup_theme', 'infokiosque_setup' );
 
 // Register options and load additional functionality
 add_action('init', 'app_init', 0);

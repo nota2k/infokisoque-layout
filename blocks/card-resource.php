@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template pour le bloc Ressource Display
+ * Template pour le bloc Ressource Display avec InnerBlocks
  * 
  * @var array $block Les paramètres du bloc
  * @var string $content Le contenu du bloc
@@ -42,125 +42,172 @@ if (!empty($block['align'])) {
     $className .= ' align' . $block['align'];
 }
 
+// Préparer les données pour les blocs
+$titre = isset($fields['titre']) ? $fields['titre'] : '';
+$auteur = isset($fields['auteur']) ? $fields['auteur'] : '';
+$annee = isset($fields['annee_parution']) ? $fields['annee_parution'] : '';
+$fichier = isset($fields['fichier']) ? $fields['fichier'] : '';
+$critique = isset($fields['critique']) ? $fields['critique'] : '';
+$excerpt = get_the_excerpt($selected_post_id);
+
+// Template pour les InnerBlocks
+$template = array();
+
+// Titre
+if (!empty($titre)) {
+    $template[] = array('core/heading', array(
+        'level' => 3,
+        'content' => $titre,
+        'className' => 'ressource-display__titre'
+    ));
+}
+
+// Auteur et année sur la même ligne
+if (!empty($auteur) || !empty($annee)) {
+    $author_year_content = '';
+    if (!empty($auteur)) {
+        $author_year_content .= '<strong>' . esc_html($auteur) . '</strong>';
+    }
+    if (!empty($annee)) {
+        if (!empty($auteur)) {
+            $author_year_content .= ' • ';
+        }
+        $author_year_content .= esc_html($annee);
+    }
+    
+    $template[] = array('core/paragraph', array(
+        'content' => $author_year_content,
+        'className' => 'ressource-display__meta'
+    ));
+}
+
+// Extrait
+if (!empty($excerpt)) {
+    $template[] = array('core/paragraph', array(
+        'content' => $excerpt,
+        'className' => 'ressource-display__excerpt'
+    ));
+}
+
+// Fichier (bouton de téléchargement)
+if (!empty($fichier)) {
+    $file_url = is_array($fichier) ? $fichier['url'] : $fichier;
+    $file_title = is_array($fichier) ? ($fichier['title'] ?: $fichier['filename']) : 'Télécharger le fichier';
+    $file_size = is_array($fichier) && isset($fichier['filesize']) ? ' (' . size_format($fichier['filesize']) . ')' : '';
+    
+    $template[] = array('core/buttons', array(
+        'className' => 'ressource-display__download'
+    ), array(
+        array('core/button', array(
+            'text' => $file_title . $file_size,
+            'url' => $file_url,
+            'linkTarget' => '_blank',
+            'className' => 'is-style-outline ressource-display__download-btn'
+        ))
+    ));
+}
+
+// Critique
+if (!empty($critique)) {
+    $template[] = array('core/paragraph', array(
+        'content' => $critique,
+        'className' => 'ressource-display__critique'
+    ));
+}
+
+// Autres champs
+$displayed_fields = array('titre', 'auteur', 'annee_parution', 'fichier', 'critique');
+$other_fields = array_diff_key($fields, array_flip($displayed_fields));
+
+if (!empty($other_fields)) {
+    $template[] = array('core/heading', array(
+        'level' => 4,
+        'content' => 'Informations complémentaires',
+        'className' => 'ressource-display__additional-title'
+    ));
+    
+    foreach ($other_fields as $field_name => $field_value) {
+        if (!empty($field_value)) {
+            $field_label = ucfirst(str_replace('_', ' ', $field_name));
+            $field_content = '';
+            
+            // Gestion des différents types de champs
+            if (is_array($field_value)) {
+                if (isset($field_value['url'])) {
+                    // Champ fichier/image
+                    $field_content = '<a href="' . esc_url($field_value['url']) . '" target="_blank">' .
+                        esc_html($field_value['title'] ?: $field_value['filename']) . '</a>';
+                } else {
+                    // Autre type de tableau
+                    $field_content = esc_html(implode(', ', array_filter($field_value)));
+                }
+            } elseif (filter_var($field_value, FILTER_VALIDATE_URL)) {
+                // URL
+                $field_content = '<a href="' . esc_url($field_value) . '" target="_blank">' . esc_html($field_value) . '</a>';
+            } else {
+                // Texte simple
+                $field_content = wp_kses_post($field_value);
+            }
+            
+            $template[] = array('core/paragraph', array(
+                'content' => '<strong>' . esc_html($field_label) . ' :</strong> ' . $field_content,
+                'className' => 'ressource-display__field ressource-display__field--' . esc_attr($field_name)
+            ));
+        }
+    }
+}
+
 ?>
 
 <div class="<?php echo esc_attr($className); ?>">
     <div class="ressource-display__container">
-
-        <!-- Titre de la ressource -->
-        <!-- <header class="ressource-display__header">
-            <h2 class="ressource-display__title"><?php echo esc_html($post->post_title); ?></h2>
-        </header> -->
-
         <div class="ressource-display__content">
-
-            <!-- Champs principaux -->
-            <div class="ressource-display__main-fields">
-
-                <?php if (isset($fields['titre']) && !empty($fields['titre'])): ?>
-                    <div class="ressource-display__field ressource-display__field--titre">
-                        <h3 class="ressource-display__field-value"><?php echo esc_html($fields['titre']); ?></h3>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($fields['auteur']) && !empty($fields['auteur'])): ?>
-                    <div class="ressource-display__field ressource-display__field--auteur">
-                        <span class="ressource-display__field-value"><?php echo esc_html($fields['auteur']); ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($fields['annee_parution']) && !empty($fields['annee_parution'])): ?>
-                    <div class="ressource-display__field ressource-display__field--annee">
-                        <span class="ressource-display__field-value"><?php echo esc_html($fields['annee_parution']); ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($fields['fichier']) && !empty($fields['fichier'])): ?>
-                    <div class="ressource-display__field ressource-display__field--fichier">
-                        <div class="ressource-display__field-value">
-                            <?php if (is_array($fields['fichier'])): ?>
-                                <a href="<?php echo esc_url($fields['fichier']['url']); ?>"
-                                    target="_blank"
-                                    class="ressource-display__file-link">
-                                    <?php echo esc_html($fields['fichier']['title'] ?: $fields['fichier']['filename']); ?>
-                                    <span class="ressource-display__file-size">
-                                        (<?php echo size_format($fields['fichier']['filesize']); ?>)
-                                    </span>
-                                </a>
-                            <?php else: ?>
-                                <a href="<?php echo esc_url($fields['fichier']); ?>"
-                                    target="_blank"
-                                    class="ressource-display__file-link">
-                                    Télécharger le fichier
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <?php 
-                // Récupérer l'extrait de la ressource
-                $excerpt = get_the_excerpt($selected_post_id);
-                if (!empty($excerpt)): ?>
-                    <div class="ressource-display__field ressource-display__field--excerpt">
-                        <div class="ressource-display__field-value ressource-display__excerpt">
-                            <p><?php echo wp_kses_post($excerpt); ?></p>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($fields['critique']) && !empty($fields['critique'])): ?>
-                    <div class="ressource-display__field ressource-display__field--critique">
-                        <div class="ressource-display__field-value ressource-display__field-value--textarea">
-                            <?php echo wp_kses_post($fields['critique']); ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-            </div>
-
-            <!-- Affichage de tous les autres champs personnalisés -->
             <?php
-            $displayed_fields = array('titre', 'auteur', 'annee_parution', 'fichier', 'critique');
-            $other_fields = array_diff_key($fields, array_flip($displayed_fields));
-
-            if (!empty($other_fields)): ?>
-                <div class="ressource-display__additional-fields">
-                    <h3 class="ressource-display__additional-title">Informations complémentaires</h3>
-
-                    <?php foreach ($other_fields as $field_name => $field_value): ?>
-                        <?php if (!empty($field_value)): ?>
-                            <div class="ressource-display__field ressource-display__field--<?php echo esc_attr($field_name); ?>">
-                                <span class="ressource-display__field-label">
-                                    <?php echo esc_html(ucfirst(str_replace('_', ' ', $field_name))); ?> :
-                                </span>
-                                <div class="ressource-display__field-value">
-                                    <?php
-                                    // Gestion des différents types de champs
-                                    if (is_array($field_value)) {
-                                        if (isset($field_value['url'])) {
-                                            // Champ fichier/image
-                                            echo '<a href="' . esc_url($field_value['url']) . '" target="_blank">' .
-                                                esc_html($field_value['title'] ?: $field_value['filename']) . '</a>';
-                                        } else {
-                                            // Autre type de tableau
-                                            echo esc_html(implode(', ', array_filter($field_value)));
-                                        }
-                                    } elseif (filter_var($field_value, FILTER_VALIDATE_URL)) {
-                                        // URL
-                                        echo '<a href="' . esc_url($field_value) . '" target="_blank">' . esc_html($field_value) . '</a>';
-                                    } else {
-                                        // Texte simple
-                                        echo wp_kses_post($field_value);
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
+            // Générer les blocs natifs en HTML avec les classes appropriées
+            foreach ($template as $block) {
+                $block_type = $block[0];
+                $block_attrs = isset($block[1]) ? $block[1] : array();
+                $inner_blocks = isset($block[2]) ? $block[2] : array();
+                
+                switch ($block_type) {
+                    case 'core/heading':
+                        $level = isset($block_attrs['level']) ? $block_attrs['level'] : 2;
+                        $content = isset($block_attrs['content']) ? $block_attrs['content'] : '';
+                        $class = isset($block_attrs['className']) ? $block_attrs['className'] : '';
+                        echo '<h' . $level . ' class="wp-block-heading ' . esc_attr($class) . '">' . wp_kses_post($content) . '</h' . $level . '>';
+                        break;
+                        
+                    case 'core/paragraph':
+                        $content = isset($block_attrs['content']) ? $block_attrs['content'] : '';
+                        $class = isset($block_attrs['className']) ? $block_attrs['className'] : '';
+                        echo '<p class="wp-block-paragraph ' . esc_attr($class) . '">' . wp_kses_post($content) . '</p>';
+                        break;
+                        
+                    case 'core/buttons':
+                        $class = isset($block_attrs['className']) ? $block_attrs['className'] : '';
+                        echo '<div class="wp-block-buttons ' . esc_attr($class) . '">';
+                        
+                        foreach ($inner_blocks as $button_block) {
+                            if ($button_block[0] === 'core/button') {
+                                $btn_attrs = isset($button_block[1]) ? $button_block[1] : array();
+                                $text = isset($btn_attrs['text']) ? $btn_attrs['text'] : '';
+                                $url = isset($btn_attrs['url']) ? $btn_attrs['url'] : '';
+                                $target = isset($btn_attrs['linkTarget']) ? $btn_attrs['linkTarget'] : '';
+                                $btn_class = isset($btn_attrs['className']) ? $btn_attrs['className'] : '';
+                                
+                                echo '<div class="wp-block-button ' . esc_attr($btn_class) . '">';
+                                echo '<a class="wp-block-button__link" href="' . esc_url($url) . '"';
+                                if ($target) echo ' target="' . esc_attr($target) . '"';
+                                echo '>' . esc_html($text) . '</a>';
+                                echo '</div>';
+                            }
+                        }
+                        
+                        echo '</div>';
+                        break;
+                }
+            }
+            ?>
         </div>
     </div>
 </div>

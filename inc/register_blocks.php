@@ -4,6 +4,9 @@
  * Enregistrement des blocs ACF personnalisés
  */
 
+// Enregistrement des blocs JavaScript
+add_action('init', 'register_js_blocks');
+
 // Enregistrement des blocs ACF
 add_action('acf/init', 'register_acf_blocks');
 
@@ -35,6 +38,41 @@ function register_acf_blocks() {
             )
         ));
     }
+}
+
+// Fonction pour enregistrer les blocs JavaScript
+function register_js_blocks() {
+    // Enregistrer le bloc Card Resource éditable
+    register_block_type('infokiosque/card-resource-editable', array(
+        'editor_script' => 'infokiosque-editor-js',
+        'editor_style' => 'infokiosque-editor-css',
+        'style' => 'infokiosque-theme-css',
+        'render_callback' => 'render_card_resource_editable_block',
+        'attributes' => array(
+            'ressourceId' => array(
+                'type' => 'number',
+                'default' => 0
+            )
+        )
+    ));
+}
+
+// Fonction de rendu pour le bloc Card Resource éditable
+function render_card_resource_editable_block($attributes, $content, $block) {
+    // Démarrer la capture de sortie
+    ob_start();
+    
+    // Définir les variables pour le template
+    $block_attributes = $attributes;
+    $is_preview = false;
+    $post_id = get_the_ID();
+    $block_context = $block->context ?? array();
+    
+    // Inclure le template
+    include get_template_directory() . '/blocks/card-resource-editable.php';
+    
+    // Retourner le contenu capturé
+    return ob_get_clean();
 }
 
 // Créer les champs ACF pour le bloc ressource
