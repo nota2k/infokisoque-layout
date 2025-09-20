@@ -152,32 +152,47 @@
 			],
 			"fontFamilies": [
 				{
-					"name": "Manrope",
-					"slug": "manrope",
-					"fontFamily": "Manrope, sans-serif",
+					"name": "Aujournuit",
+					"slug": "Aujournuit",
+					"fontFamily": "Aujournuit, serif",
 					"fontFace": [
 						{
 							"src": [
-								"file:./assets/fonts/manrope/Manrope-VariableFont_wght.woff2"
+								"file:./assets/fonts/aujournuit/Aujournuit-VariableVF.woff2"
 							],
 							"fontWeight": "200 800",
 							"fontStyle": "normal",
-							"fontFamily": "Manrope"
+							"fontFamily": "Aujournuit"
 						}
 					]
 				},
 				{
-					"name": "Fira Code",
-					"slug": "fira-code",
-					"fontFamily": "\"Fira Code\", monospace",
+					"name": "Basteleur",
+					"slug": "basteleur",
+					"fontFamily": "\"Basteleur\", monospace",
 					"fontFace": [
 						{
 							"src": [
-								"file:./assets/fonts/fira-code/FiraCode-VariableFont_wght.woff2"
+								"file:./assets/fonts/basteleur/Basteleur-Moonlight.woff2"
 							],
 							"fontWeight": "300 700",
 							"fontStyle": "normal",
-							"fontFamily": "\"Fira Code\""
+							"fontFamily": "\"Basteleur\""
+						}
+					]
+				},
+				{
+					"name": "Velvelyne",
+					"slug": "velvelyne",
+					"fontFamily": "\"Velvelyne\", serif",
+					"fontFace": [
+						{
+							"src": [
+								"file:./assets/fonts/velvelyne/Velvelyne-Regular.woff2"
+							],
+							"fontWeight": "300 700",
+							"fontStyle": "normal",
+							"fontFamily": "\"Velvelyne\""
 						}
 					]
 				}
