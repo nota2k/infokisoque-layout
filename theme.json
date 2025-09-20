@@ -195,6 +195,21 @@
 							"fontFamily": "\"Velvelyne\""
 						}
 					]
+				},
+				{
+					"name": "Bagnard",
+					"slug": "bagnard",
+					"fontFamily": "\"Bagnard\", sans-serif",
+					"fontFace": [
+						{
+							"src": [
+								"file:./assets/fonts/bagnard/Bagnard.otf"
+							],
+							"fontWeight": "300 700",
+							"fontStyle": "normal",
+							"fontFamily": "\"Bagnard\""
+						}
+					]
 				}
 			]
 		},

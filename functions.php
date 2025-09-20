@@ -37,6 +37,9 @@ function app_init()
 {
 	require_once APP_THEME_DIR . 'inc/blocks.php';
 	require_once APP_THEME_DIR . 'inc/enqueues.php';
+	require_once APP_THEME_DIR . 'inc/blocks.php';
+	require_once APP_THEME_DIR . 'inc/theme-parts.php';
+	require_once APP_THEME_DIR . 'inc/register_blocks.php';
 }
 
 // Enqueues style.css on the front.

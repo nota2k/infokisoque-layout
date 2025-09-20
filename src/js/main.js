@@ -4,9 +4,9 @@
 
 // Import jQuery depuis WordPress
 import $ from 'jquery';
-
+import 'magic-grid';
 // Import des modules JavaScript si nécessaire
-// import './modules/example-module.js';
+import './layout.js';
 
 // Initialisation du thème
 $(document).ready(function() {
